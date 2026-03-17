@@ -1,0 +1,113 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Fedda's Digital Space";
+}
+
+<div class="main-container">
+    <h1 id="animated-header">Welcome, Fedda Al Ahmad</h1>
+
+    <div class="content-wrapper">
+        <div class="video-section">
+            <h3>Current Favorite Track</h3>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/MPkWiO0y3qg?si=JgjXjaFWXld8Wi9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <p class="bio">Exploring the intersection of code and creativity.</p>
+    </div>
+</div>
+
+<style>
+    /* Custom CSS Styling */
+    :root {
+        --primary-color: #00d4ff;
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --text-color: #ffffff;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main-container {
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    #animated-header {
+        font-size: 3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        display: inline-block;
+    }
+
+    .content-wrapper {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        display: inline-block;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        margin: 20px 0;
+    }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    .bio {
+        font-style: italic;
+        color: #888;
+        margin-top: 20px;
+    }
+</style>
+
+<script>
+    // JavaScript Looped Animation for h1
+    const header = document.getElementById('animated-header');
+    let hue = 0;
+    let scale = 1;
+    let growing = true;
+
+    function animate() {
+        // Update Color (Hue Rotation)
+        hue = (hue + 1) % 360;
+
+        // Gentle Pulse logic
+        if (growing) {
+            scale += 0.002;
+            if (scale >= 1.1) growing = false;
+        } else {
+            scale -= 0.002;
+            if (scale <= 0.95) growing = true;
+        }
+
+        // Apply transformations
+        header.style.color = `hsl(${hue}, 80%, 60%)`;
+        header.style.transform = `scale(${scale}) rotate(${Math.sin(hue / 20) * 2}deg)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    // Start the loop
+    animate();
+</script>
